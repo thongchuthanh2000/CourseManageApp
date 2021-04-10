@@ -9,7 +9,5 @@ import javax.persistence.Table;
 @Entity
 @Data
 public class Trainer extends BaseUserEntity{
-
     private boolean isReceiveNotification;
-
 }

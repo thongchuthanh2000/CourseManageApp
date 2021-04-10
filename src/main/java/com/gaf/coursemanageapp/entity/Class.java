@@ -1,10 +1,14 @@
 package com.gaf.coursemanageapp.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.Collection;
+import java.util.Set;
+
 
 @Data
 @Entity
@@ -16,4 +20,16 @@ public class Class {
     private Date startTime;
     private Date endTime;
     private boolean isDeleted = false;
+
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // Quan hệ n-n với đối tượng ở dưới (Person) (1 địa điểm có nhiều người ở)
+    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
+    @ToString.Exclude // Khoonhg sử dụng trong toString()
+
+    @JoinTable(name = "enrollment", //Tạo ra một join Table tên là ""
+            joinColumns = @JoinColumn(name = "classID"),  // TRong đó, khóa ngoại chính là  trỏ tới class hiện tại ()
+            inverseJoinColumns = @JoinColumn(name = "traineeID") //Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới
+    )
+    private Collection<Trainee> trainees;
 }

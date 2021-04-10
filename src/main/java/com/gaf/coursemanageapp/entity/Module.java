@@ -2,12 +2,10 @@ package com.gaf.coursemanageapp.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Date;
+
 
 @Data
 @Entity
@@ -25,6 +23,7 @@ public class Module {
     private Date endTime;
 
     private boolean isDeleted;
+
     private Timestamp feedbackStartTime;
     private Timestamp feedbackEndTime;
 

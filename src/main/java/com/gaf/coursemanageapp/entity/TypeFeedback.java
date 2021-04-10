@@ -17,5 +17,4 @@ public class TypeFeedback {
     private String typeName;
 
     private  boolean isDeleted;
-
 }
