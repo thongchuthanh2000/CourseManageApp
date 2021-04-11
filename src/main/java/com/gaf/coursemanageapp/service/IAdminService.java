@@ -7,4 +7,5 @@ import java.util.List;
 public interface IAdminService {
     public List<Admin> findAll();
     public  void save(Admin admin);
+//    public  Admin findAdminByUserName(String userName);
 }

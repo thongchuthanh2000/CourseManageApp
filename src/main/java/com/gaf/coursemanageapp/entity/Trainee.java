@@ -1,15 +1,16 @@
 package com.gaf.coursemanageapp.entity;
 
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
 @Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Trainee  extends BaseUserEntity{
 
 

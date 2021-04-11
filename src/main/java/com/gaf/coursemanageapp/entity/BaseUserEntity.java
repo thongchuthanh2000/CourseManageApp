@@ -9,6 +9,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @Data
+
 public class BaseUserEntity {
     @Id
     private  String userName;

@@ -1,6 +1,9 @@
 package com.gaf.coursemanageapp.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,6 +12,9 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Module {
     @Id
     private Integer moduleID;
