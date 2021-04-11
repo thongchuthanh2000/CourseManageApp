@@ -19,12 +19,10 @@ public class AdminServiceImpl implements IAdminService {
     @Autowired
     private AdminRepository adminRepository;
 
-//    @Override
-//    public Admin findAdminByUserName(String userName) {
-//        return adminRepository.getAdminByUserName(userName);
-//    }
-
-
+    @Override
+    public Admin findByUserName(String userName) {
+        return adminRepository.findByUserName(userName);
+    }
     public List<Admin> findAll(){
         return adminRepository.findAll();
     }

@@ -12,30 +12,27 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.authentication.BadCredentialsException;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-//    AuthenticationManager authenticationManager;
-
-//    Logger logger = LoggerFactory.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private IAdminService adminService;
 
-    @GetMapping(value = "/"
-//            , produces = "application/json"
-    )
-
-    //@PreAuthorize("@appAuthorizer.authorize(authentication, 'VIEW', this)")
+    @GetMapping(value = "/", produces = "application/json")
+    @PreAuthorize("@appAuthorizer.authorize(authentication, 'VIEW', this)")
     public Admin getAdmin(){
 //        return  adminService.findAdminByUserName("cheng");
-        return  adminService.findAll().get(0);
+        return  adminService.findByUserName("cheng");
     }
 
 //    @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
