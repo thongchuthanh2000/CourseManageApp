@@ -28,7 +28,6 @@ public class AdminServiceImpl implements IAdminService {
     public List<Admin> findAll(){
         return adminRepository.findAll();
     }
-
     public  void save(Admin admin){
         adminRepository.save(admin);
     }
