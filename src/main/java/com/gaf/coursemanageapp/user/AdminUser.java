@@ -2,12 +2,14 @@ package com.gaf.coursemanageapp.user;
 
 import com.gaf.coursemanageapp.entity.Admin;
 
-public class AdminUser implements BaseUser {
+public class AdminUser implements BaseUser<Admin> {
 
     Admin admin;
+
+
     @Override
-    public Object getUser() {
-        return admin;
+    public void setUser(Admin user) {
+        this.admin = user;
     }
 
     @Override

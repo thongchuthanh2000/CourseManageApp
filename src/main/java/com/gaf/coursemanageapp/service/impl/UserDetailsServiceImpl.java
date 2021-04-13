@@ -8,6 +8,7 @@ import com.gaf.coursemanageapp.user.BaseUser;
 import com.gaf.coursemanageapp.user.UserFactory;
 import com.gaf.coursemanageapp.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    BaseUser baseUser;
+    private  BaseUser baseUser;
 
-    public UserDetailsServiceImpl(){
-        baseUser = UserFactory.getUser(SystemConstant.ADMIN_ROLE);
-    }
+
     @Autowired
     private AdminRepository adminRepository;
 
@@ -29,16 +28,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        baseUser = UserFactory.getUser(SystemConstant.USER);
 
         switch (SystemConstant.ADMIN_ROLE) {
 
             case SystemConstant
                     .ADMIN_ROLE:
-                baseUser = (BaseUser) adminRepository.findByUserName(username);
+                baseUser.setUser(adminRepository.findByUserName(username));
                 break;
             case SystemConstant
                     .TRAINEE_ROLE:
-                baseUser = (BaseUser) traineeRepository.findByUserName(username);
+                baseUser.setUser(traineeRepository.findByUserName(username));
                 break;
 
 

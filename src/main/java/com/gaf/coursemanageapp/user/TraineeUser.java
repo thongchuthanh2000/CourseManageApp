@@ -2,11 +2,13 @@ package com.gaf.coursemanageapp.user;
 
 import com.gaf.coursemanageapp.entity.Trainee;
 
-public class TraineeUser implements BaseUser{
+public class TraineeUser implements BaseUser<Trainee>{
     Trainee trainee;
+
+
     @Override
-    public Object getUser() {
-        return trainee;
+    public void setUser(Trainee user) {
+        this.trainee = user;
     }
 
     @Override

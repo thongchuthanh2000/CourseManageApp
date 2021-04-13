@@ -1,7 +1,10 @@
 package com.gaf.coursemanageapp.user;
 
-public interface BaseUser {
-    Object getUser();
+
+
+public interface BaseUser<T>  {
+
+    void setUser(T user);
 
     String getPassword();
 
