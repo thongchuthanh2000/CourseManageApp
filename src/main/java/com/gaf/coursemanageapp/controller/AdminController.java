@@ -57,14 +57,14 @@ public class AdminController {
 //    @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
 //    @PreAuthorize("{@appAuthorizer.authorize(authentication, 'INSERT', this)}")
 //
-//    public ResponseEntity<Object> addAdmin(@RequestBody Admin admin){
+//    public ResponseEntity<Object> addAdmin(@RequestBody AdminUser admin){
 //        adminService.save(admin);
 //        return  null;
 //    }
 
 
 //    @PostMapping("/login")
-//    public ResponseEntity login(@RequestBody Admin admin) {
+//    public ResponseEntity login(@RequestBody AdminUser admin) {
 //        try {
 //            String username = admin.getUserName();
 //            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));

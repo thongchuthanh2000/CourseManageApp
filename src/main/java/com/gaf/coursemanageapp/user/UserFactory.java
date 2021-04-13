@@ -1,7 +1,6 @@
 package com.gaf.coursemanageapp.user;
 
 import com.gaf.coursemanageapp.constant.SystemConstant;
-import org.hibernate.usertype.UserType;
 
 public class UserFactory {
     private  UserFactory(){
@@ -12,10 +11,10 @@ public class UserFactory {
 
             case SystemConstant
                     .ADMIN_ROLE:
-                return new Admin();
+                return new AdminUser();
             case SystemConstant
                     .TRAINEE_ROLE:
-                return new Trainee();
+                return new TraineeUser();
 
             default:
                 throw new IllegalArgumentException("This user type is unsupported");

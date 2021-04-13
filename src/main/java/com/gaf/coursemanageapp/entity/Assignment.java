@@ -70,7 +70,7 @@ public class Assignment{
 //            inverseJoinColumns = @JoinColumn(name = "traineeID") //Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới
 //    )
 //
-//    private Collection<Trainee> trainees;
+//    private Collection<TraineeUser> trainees;
 
 }
 

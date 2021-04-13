@@ -1,19 +1,22 @@
 package com.gaf.coursemanageapp.user;
 
-public class Admin implements BaseUser {
+import com.gaf.coursemanageapp.entity.Admin;
 
+public class AdminUser implements BaseUser {
+
+    Admin admin;
     @Override
     public Object getUser() {
-        return new com.gaf.coursemanageapp.entity.Admin();
+        return admin;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return admin.getPassword();
     }
 
     @Override
     public String getUserName() {
-        return null;
+        return admin.getUserName();
     }
 }

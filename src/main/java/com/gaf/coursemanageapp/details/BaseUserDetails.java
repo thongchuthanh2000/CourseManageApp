@@ -30,7 +30,7 @@ public class BaseUserDetails implements org.springframework.security.core.userde
 //        }
 //        return authorities;
 
-        return Collections.singleton(new SimpleGrantedAuthority(SystemConstant.ADMIN_ROLE));
+        return Collections.singleton(new SimpleGrantedAuthority(SystemConstant.USER));
     }
 
     @Override

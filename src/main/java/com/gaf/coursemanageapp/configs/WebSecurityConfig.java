@@ -28,9 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    private UserDetailsServiceImpl userAdminDetailsService;
-
-    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService());
     }
@@ -69,27 +66,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
 //                .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
 //                .antMatchers("/delete/**").hasAuthority("ADMIN")
-                .antMatchers("/admin/ec").hasAnyAuthority(SystemConstant.ADMIN_ROLE)
-                .antMatchers("/admin/login").permitAll()
+                .antMatchers("/admin/loadprofile").hasAnyAuthority(SystemConstant.ADMIN_ROLE)
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
                 .and()
                 .logout().permitAll()
-//                .and()
-//                .exceptionHandling().accessDeniedPage("/403")
-
-//                .authorizeRequests()
-//                .antMatchers("/", "/home").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
-//                .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
-//                .and()
-//                .formLogin() // Cho phép người dùng xác thực bằng form login
-//                .defaultSuccessUrl("/hello")
-//                .permitAll() // Tất cả đều được truy cập vào địa chỉ này
-//                .and()
-//                .logout() // Cho phép logout
-//                .permitAll();
-        ;
+                ;
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
