@@ -1,6 +1,6 @@
 package com.gaf.coursemanageapp.filter;
 
-import com.gaf.coursemanageapp.service.impl.UserAdminDetailsServiceImpl;
+import com.gaf.coursemanageapp.service.impl.UserDetailsServiceImpl;
 import com.gaf.coursemanageapp.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private UserAdminDetailsServiceImpl userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private JwtUtil jwtUtil;

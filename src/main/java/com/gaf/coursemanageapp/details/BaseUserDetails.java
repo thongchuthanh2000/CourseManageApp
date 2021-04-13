@@ -2,22 +2,21 @@ package com.gaf.coursemanageapp.details;
 
 import com.gaf.coursemanageapp.constant.SystemConstant;
 import com.gaf.coursemanageapp.entity.Admin;
-import com.gaf.coursemanageapp.utils.Role;
+import com.gaf.coursemanageapp.user.BaseUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
-public class UserAdminDetails implements UserDetails {
+public class BaseUserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
-    private Admin admin;
+    private BaseUser baseUser;
 
-    public UserAdminDetails(Admin admin){
-        this.admin = admin;
+
+    public BaseUserDetails(BaseUser baseUser){
+        this.baseUser = baseUser;
     }
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -29,20 +28,19 @@ public class UserAdminDetails implements UserDetails {
 //        for (Role role : roles) {
 //            authorities.add(new SimpleGrantedAuthority(role.getRole()));
 //        }
-        return Collections.singleton(new SimpleGrantedAuthority(SystemConstant.ADMIN_ROLE));
-
-
 //        return authorities;
+
+        return Collections.singleton(new SimpleGrantedAuthority(SystemConstant.ADMIN_ROLE));
     }
 
     @Override
     public String getPassword() {
-        return admin.getPassword();
+        return baseUser.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return admin.getUserName();
+        return baseUser.getUserName();
     }
 
     @Override

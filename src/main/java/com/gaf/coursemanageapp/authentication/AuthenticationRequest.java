@@ -1,4 +1,4 @@
-package com.gaf.coursemanageapp.models;
+package com.gaf.coursemanageapp.authentication;
 
 import java.io.Serializable;
 
