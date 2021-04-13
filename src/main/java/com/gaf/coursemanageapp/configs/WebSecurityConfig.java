@@ -18,16 +18,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private JwtRequestFilter jwtRequestFilter;
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserAdminDetailsServiceImpl();
     }
 
-//    @Autowired
-//    private UserAdminDetailsServiceImpl userAdminDetailsService;
+    @Autowired
+    private UserAdminDetailsServiceImpl userAdminDetailsService;
 
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,19 +53,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userAdminDetailsService);
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
                 .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
                 .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
                 .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
                 .antMatchers("/delete/**").hasAuthority("ADMIN")
+                .antMatchers("/admin/ec").hasAnyAuthority("ADMIN")
+                .antMatchers("/admin/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
@@ -73,6 +80,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().permitAll()
 //                .and()
 //                .exceptionHandling().accessDeniedPage("/403")
+
+//                .authorizeRequests()
+//                .antMatchers("/", "/home").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+//                .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
+//                .and()
+//                .formLogin() // Cho phép người dùng xác thực bằng form login
+//                .defaultSuccessUrl("/hello")
+//                .permitAll() // Tất cả đều được truy cập vào địa chỉ này
+//                .and()
+//                .logout() // Cho phép logout
+//                .permitAll();
         ;
     }
 }

@@ -21,17 +21,18 @@ public class UserAdminDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = new HashSet<>();
-        roles.add(new Role((SystemConstant.ADMIN_ROLE)));
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(new Role((SystemConstant.ADMIN_ROLE)));
+//
+//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//
+//        for (Role role : roles) {
+//            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+//        }
+        return Collections.singleton(new SimpleGrantedAuthority(SystemConstant.ADMIN_ROLE));
 
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
-        }
-
-
-        return authorities;
+//        return authorities;
     }
 
     @Override
