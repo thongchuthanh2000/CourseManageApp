@@ -7,6 +7,17 @@ public class AuthenticationRequest implements Serializable {
 
     private String username;
     private String password;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
 
     public String getUsername() {
         return username;
@@ -30,7 +41,8 @@ public class AuthenticationRequest implements Serializable {
 
     }
 
-    public AuthenticationRequest(String username, String password) {
+    public AuthenticationRequest(String username, String password, String role) {
+        this.setRole(role);
         this.setUsername(username);
         this.setPassword(password);
     }

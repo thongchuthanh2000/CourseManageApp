@@ -22,14 +22,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
-    }
+
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService);
     }
 
     @Bean
@@ -67,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
 //                .antMatchers("/delete/**").hasAuthority("ADMIN")
                 .antMatchers("/admin/loadprofile").hasAnyAuthority(SystemConstant.ADMIN_ROLE)
-                .antMatchers("/login").permitAll()
+                .antMatchers("/login/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
