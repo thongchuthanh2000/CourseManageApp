@@ -36,22 +36,6 @@ public class AdminController {
         return  adminService.findByUserName("tangyucheng");
     }
 
-//    @SuppressWarnings("rawtypes")
-//    @PostMapping("/login")
-//    public ResponseEntity login(@RequestBody AuthBody data) {
-//        try {
-//            String username = data.getUser();
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-//            String token = jwtTokenProvider.createToken(username, (Set<Role>) new Role(SystemConstant.ADMIN_ROLE));
-//            Map<Object, Object> model = new HashMap<>();
-//
-//            model.put("username", username);
-//            model.put("token", token);
-//            return ok(model);
-//        } catch (AuthenticationException e) {
-//            throw new BadCredentialsException("Invalid email/password supplied");
-//        }
-//    }
 
 
 //    @PostMapping(path = "/", consumes = "application/json", produces = "application/json")

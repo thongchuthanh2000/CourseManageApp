@@ -13,10 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/login")
@@ -31,25 +28,25 @@ public class LoginController {
     private UserDetailsServiceImpl userAdminDetailsService;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest
+                                                       )
             throws Exception {
-
         String role =authenticationRequest.getRole();
-//        switch (role) {
-//
-//            case SystemConstant
-//                    .ADMIN_ROLE:
-//                SystemConstant.USER = SystemConstant.ADMIN_ROLE;
-//                break;
-//            case SystemConstant
-//                    .TRAINEE_ROLE:
-//                SystemConstant.USER = SystemConstant.TRAINEE_ROLE;
-//                break;
-//
-//
-//            default:
-//                throw new Exception("Incorrect ROLE");
-//        }
+        switch (role) {
+
+            case SystemConstant
+                    .ADMIN_ROLE:
+                SystemConstant.USER = SystemConstant.ADMIN_ROLE;
+                break;
+            case SystemConstant
+                    .TRAINEE_ROLE:
+                SystemConstant.USER = SystemConstant.TRAINEE_ROLE;
+                break;
+
+
+            default:
+                throw new Exception("Incorrect ROLE");
+        }
 
         try {
             authenticationManager.authenticate(
