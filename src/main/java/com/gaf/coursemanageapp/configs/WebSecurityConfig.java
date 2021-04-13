@@ -1,5 +1,6 @@
 package com.gaf.coursemanageapp.configs;
 
+import com.gaf.coursemanageapp.constant.SystemConstant;
 import com.gaf.coursemanageapp.filter.JwtRequestFilter;
 import com.gaf.coursemanageapp.service.impl.UserAdminDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -29,10 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserAdminDetailsServiceImpl userAdminDetailsService;
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService());
-//    }
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService());
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -59,19 +61,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userAdminDetailsService);
-    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
-                .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
-                .antMatchers("/delete/**").hasAuthority("ADMIN")
-                .antMatchers("/admin/ec").hasAnyAuthority("ADMIN")
+//                .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
+//                .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
+//                .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
+//                .antMatchers("/delete/**").hasAuthority("ADMIN")
+                .antMatchers("/admin/ec").hasAnyAuthority(SystemConstant.ADMIN_ROLE)
                 .antMatchers("/admin/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -92,5 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .logout() // Cho phép logout
 //                .permitAll();
         ;
+
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

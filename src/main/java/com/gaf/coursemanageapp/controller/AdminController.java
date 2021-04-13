@@ -47,7 +47,7 @@ public class AdminController {
     @Autowired
     private UserAdminDetailsServiceImpl userAdminDetailsService;
 
-    @GetMapping(value = "/ec")
+    @RequestMapping(value = "/ec")
     public Admin getAdmin(){
         return  adminService.findByUserName("tangyucheng");
     }
