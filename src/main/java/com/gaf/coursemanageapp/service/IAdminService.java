@@ -1,11 +1,13 @@
 package com.gaf.coursemanageapp.service;
 
+import com.gaf.coursemanageapp.dto.AdminDTO;
 import com.gaf.coursemanageapp.entity.Admin;
 
 import java.util.List;
 
 public interface IAdminService {
-    public List<Admin> findAll();
-    public void save(Admin admin);
-    public  Admin findByUserName(String userName);
+    List<AdminDTO> findAll();
+    void save(Admin admin);
+    Admin findByUserName(String userName);
+
 }

@@ -3,6 +3,7 @@ package com.gaf.coursemanageapp.configs;
 import com.gaf.coursemanageapp.constant.SystemConstant;
 import com.gaf.coursemanageapp.filter.JwtRequestFilter;
 import com.gaf.coursemanageapp.service.impl.UserDetailsServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
