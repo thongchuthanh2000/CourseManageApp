@@ -1,6 +1,7 @@
 package com.gaf.coursemanageapp.entity;
 
 
+import com.gaf.coursemanageapp.validator.CheckID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 
 public class Admin {
     @Id
+    @CheckID
     private String userName;
     private String name;
     private String email;

@@ -1,27 +1,15 @@
 package com.gaf.coursemanageapp.controller;
 
-
-//import com.gaf.coursemanageapp.configs.JwtTokenProvider;
 import com.gaf.coursemanageapp.entity.Admin;
-import com.gaf.coursemanageapp.authentication.AuthenticationRequest;
-import com.gaf.coursemanageapp.authentication.AuthenticationResponse;
 import com.gaf.coursemanageapp.service.IAdminService;
-import com.gaf.coursemanageapp.service.impl.UserDetailsServiceImpl;
-import com.gaf.coursemanageapp.utils.JwtUtil;
-//import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-//import org.springframework.security.access.prepost.PreAuthorize;
-//import org.springframework.security.authentication.BadCredentialsException;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationManager;
 
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.ResponseEntity.ok;
+
 
 @RestController
 @RequestMapping(value = "/admin")
@@ -31,9 +19,12 @@ public class AdminController {
     @Autowired
     private IAdminService adminService;
 
-    @RequestMapping(value = "/loadprofile")
-    public Admin getAdmin(){
-        return  adminService.findByUserName("tangyucheng");
+    @GetMapping(value = "/loadprofile/{username}")
+//    @PreAuthorize("hasAuthority(d)")
+    public Admin getAdmin(@PathVariable("username") String username){
+
+
+        return  adminService.findByUserName(username);
     }
 
 
