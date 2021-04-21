@@ -12,10 +12,6 @@ import java.util.Optional;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin,String> {
 
-//    @Query("SELECT u FROM AdminUser u WHERE u.userName = :username")
-//    public AdminUser getAdminByUserName(@Param("username") String username);
-
-
     Admin findByUserName(String userName);
     Boolean existsByUserName(String userName);
     Boolean existsByEmail(String email);

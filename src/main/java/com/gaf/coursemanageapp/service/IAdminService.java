@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface IAdminService {
     List<AdminDTO> findAll();
-    void save(Admin admin);
-    Admin findByUserName(String userName);
+    void save(AdminDTO admin);
+    AdminDTO findByUserName(String userName);
+    void update(AdminDTO admin);
 
 }

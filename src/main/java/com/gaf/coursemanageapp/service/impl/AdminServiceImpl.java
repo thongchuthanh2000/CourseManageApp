@@ -10,6 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 import javax.annotation.PostConstruct;
@@ -25,14 +28,23 @@ public class AdminServiceImpl implements IAdminService {
     @Autowired
     private  ModelMapper mapper;
 
-    Admin admin;
-
     @Autowired
     private AdminRepository adminRepository;
 
     @Override
-    public Admin findByUserName(String userName) {
-        return adminRepository.findByUserName(userName);
+    public AdminDTO findByUserName(String userName) {
+        Admin admin= adminRepository.findByUserName(userName);
+        AdminDTO  adminDTO = mapper.map(admin, (Type) AdminDTO.class);
+        return adminDTO;
+    }
+
+    @Override
+    public void update(AdminDTO admin) {
+        Admin oldAdmin=  adminRepository.findByUserName(admin.getUserName());
+
+        oldAdmin.setName(admin.getName());
+        oldAdmin.setEmail(admin.getEmail());
+        adminRepository.save(oldAdmin);
     }
 
 
@@ -41,9 +53,13 @@ public class AdminServiceImpl implements IAdminService {
         List<AdminDTO>  adminDto = mapper.map(admins, (Type) AdminDTO.class);
         return adminDto;
     }
-    public  void save(Admin admin){
+
+    @Override
+    public void save(AdminDTO adminDTO) {
+        Admin admin = mapper.map(adminDTO,Admin.class);
         adminRepository.save(admin);
     }
+
 
 
 }

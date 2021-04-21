@@ -1,14 +1,24 @@
 package com.gaf.coursemanageapp.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
 @Table(name = "trainee_Comment")
 @AssociationOverrides({
         @AssociationOverride(name = "primaryKey.class",
                 joinColumns = @JoinColumn(name = "classID")),
         @AssociationOverride(name = "primaryKey.trainee",
-                joinColumns = @JoinColumn(name = "traineeID")),
+                joinColumns = @JoinColumn(name = "traineeId",referencedColumnName = "username")),
         @AssociationOverride(name = "primaryKey.module",
                 joinColumns = @JoinColumn(name = "moduleID")),
 })

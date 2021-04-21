@@ -13,16 +13,12 @@ import javax.persistence.MappedSuperclass;
 @Data
 public class BaseUserEntity {
     @Id
+    @Column(name = "username")
     private  String userName;
     private String name;
     private  String email;
     private String password;
 
 
-    private String phone;
-    private String address;
-    private boolean isActive;
-    private Integer idSkill;
-    private String activationCode;
-    private String resetPasswordCode;
+
 }

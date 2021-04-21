@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -15,10 +16,9 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
-public class Admin {
+public class Admin extends BaseUserEntity{
     @Id
-    @CheckID
+    @Column(length = 50)
     private String userName;
     private String name;
     private String email;

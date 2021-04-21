@@ -1,14 +1,18 @@
 package com.gaf.coursemanageapp.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
 @Embeddable
 public  class AnswerID implements java.io.Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
@@ -20,8 +24,8 @@ public  class AnswerID implements java.io.Serializable {
     private Module module;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trainerID")
-    private Trainer trainer;
+    @JoinColumn(name = "traineeID",referencedColumnName = "username")
+    private Trainee trainee;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "questionID")

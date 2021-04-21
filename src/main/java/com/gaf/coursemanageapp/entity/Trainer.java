@@ -15,5 +15,11 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Builder
 public class Trainer extends BaseUserEntity{
+    private String phone;
+    private String address;
+    private boolean isActive;
+    private Integer idSkill;
+    private String activationCode;
+    private String resetPasswordCode;
     private boolean isReceiveNotification;
 }

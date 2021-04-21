@@ -20,6 +20,7 @@ public class Module {
     private Integer moduleID;
 
     @ManyToOne
+    @JoinColumn(name = "adminID",referencedColumnName = "username")
     private Admin admin;
 
     @Column(length = 50)

@@ -1,25 +1,25 @@
 package com.gaf.coursemanageapp.entity;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Data
 @Embeddable
-public  class TraineeWithID implements java.io.Serializable {
+public  class TraineeAssignmentID implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "classID")
-    private Class mClass;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "moduleID")
-    private Module module;
+    @JoinColumn(name = "registrationCode")
+    private Assignment assignment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "traineeId",referencedColumnName = "username")
-    private Trainee trainee;
-
+    private  Trainee trainee;
 }

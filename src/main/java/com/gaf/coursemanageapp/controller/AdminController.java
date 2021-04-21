@@ -1,11 +1,17 @@
 package com.gaf.coursemanageapp.controller;
 
+import com.gaf.coursemanageapp.dto.AdminDTO;
 import com.gaf.coursemanageapp.entity.Admin;
 import com.gaf.coursemanageapp.service.IAdminService;
 
+import com.gaf.coursemanageapp.user.AdminUser;
+import com.gaf.coursemanageapp.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +25,32 @@ public class AdminController {
     @Autowired
     private IAdminService adminService;
 
-    @GetMapping(value = "/loadprofile/{username}")
-//    @PreAuthorize("hasAuthority(d)")
-    public Admin getAdmin(@PathVariable("username") String username){
+    @PostMapping(value = "/loadProfile")
+    public AdminDTO getAdmin(){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        return  adminService.findByUserName(userDetails.getUsername());
+    }
 
 
-        return  adminService.findByUserName(username);
+    @PutMapping(value = "/updateProfile")
+    public boolean updateAdmin(@RequestBody AdminDTO adminDTO){
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+
+        try{
+            if (adminDTO.getUserName().equals(userDetails.getUsername())){
+                adminService.update(adminDTO);
+                return true;
+            }
+        }
+        catch (Exception exception){
+
+        }
+        return  false;
     }
 
 
