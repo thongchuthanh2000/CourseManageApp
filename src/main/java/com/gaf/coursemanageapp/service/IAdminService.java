@@ -8,6 +8,6 @@ import java.util.List;
 public interface IAdminService {
     List<AdminDTO> findAll();
     void save(Admin admin);
-    Admin findByUserName(String userName);
+    AdminDTO findByUserName(String userName);
 
 }

@@ -31,8 +31,10 @@ public class AdminServiceImpl implements IAdminService {
     private AdminRepository adminRepository;
 
     @Override
-    public Admin findByUserName(String userName) {
-        return adminRepository.findByUserName(userName);
+    public AdminDTO findByUserName(String userName) {
+        Admin admin= (Admin) adminRepository.findByUserName(userName);
+        AdminDTO  adminDTO = mapper.map(admin, (Type) AdminDTO.class);
+        return adminDTO;
     }
 
 

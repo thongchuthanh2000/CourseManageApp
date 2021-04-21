@@ -1,5 +1,6 @@
 package com.gaf.coursemanageapp.controller;
 
+import com.gaf.coursemanageapp.dto.AdminDTO;
 import com.gaf.coursemanageapp.entity.Admin;
 import com.gaf.coursemanageapp.service.IAdminService;
 
@@ -21,9 +22,7 @@ public class AdminController {
 
     @GetMapping(value = "/loadprofile/{username}")
 //    @PreAuthorize("hasAuthority(d)")
-    public Admin getAdmin(@PathVariable("username") String username){
-
-
+    public AdminDTO getAdmin(@PathVariable("username") String username){
         return  adminService.findByUserName(username);
     }
 

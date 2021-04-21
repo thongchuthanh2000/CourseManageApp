@@ -1,24 +1,29 @@
 package com.gaf.coursemanageapp.entity;
 
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import com.gaf.coursemanageapp.user.TraineeUser;
+import lombok.*;
 import org.apache.tomcat.jni.Address;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.RowId;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 
+@Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
 @Table
 @AssociationOverrides({
 
         @AssociationOverride(name = "primaryKey.class",
                 joinColumns = @JoinColumn(name = "classID")),
         @AssociationOverride(name = "primaryKey.trainer",
-                joinColumns = @JoinColumn(name = "trainerID")),
+                joinColumns = @JoinColumn(name = "trainerID",referencedColumnName = "username")),
         @AssociationOverride(name = "primaryKey.module",
                 joinColumns = @JoinColumn(name = "moduleID")),
 })
@@ -46,7 +51,7 @@ public class Assignment{
     }
 
     @Transient
-    public Trainee getTrainee() {
+        public Trainee getTrainee() {
         return getPrimaryKey().getTrainee();
     }
     public void setTrainee(Trainee trainee) {
@@ -54,11 +59,10 @@ public class Assignment{
     }
 
 
+
+
     @Column(length = 50, nullable = false, unique = true)
     private String registrationCode;
-
-
-
 
 
 //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -67,10 +71,10 @@ public class Assignment{
 //    @ToString.Exclude // Khoonhg sử dụng trong toString()
 //    @JoinTable(name = "trainee_Assignment", //Tạo ra một join Table tên là ""
 //            joinColumns = @JoinColumn(name = "registrationCode"),  // TRong đó, khóa ngoại chính là  trỏ tới class hiện tại ()
-//            inverseJoinColumns = @JoinColumn(name = "traineeID") //Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới
+//            inverseJoinColumns = @JoinColumn(name = "traineeID") //Khóa ngoại thứ 2 trỏ tới thuộc tanh ở dưới
 //    )
 //
-//    private Collection<TraineeUser> trainees;
+//    private Collection<Trainee> trainees;
 
 }
 

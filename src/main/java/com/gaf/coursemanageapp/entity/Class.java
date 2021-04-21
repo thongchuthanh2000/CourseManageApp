@@ -1,8 +1,6 @@
 package com.gaf.coursemanageapp.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -12,6 +10,10 @@ import java.util.Set;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
 public class Class {
     @Id
     private String classID;
@@ -29,7 +31,7 @@ public class Class {
 
     @JoinTable(name = "enrollment", //Tạo ra một join Table tên là ""
             joinColumns = @JoinColumn(name = "classID"),  // TRong đó, khóa ngoại chính là  trỏ tới class hiện tại ()
-            inverseJoinColumns = @JoinColumn(name = "traineeID") //Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới
+            inverseJoinColumns = @JoinColumn(name = "traineeID",referencedColumnName = "username") //Khóa ngoại thứ 2 trỏ tới thuộc tính ở dưới
     )
     private Collection<Trainee> trainees;
 }

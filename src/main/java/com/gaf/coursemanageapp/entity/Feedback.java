@@ -9,8 +9,10 @@ import java.util.Set;
 
 @Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
 public class Feedback {
     @Id
     private Integer feedbackID;
@@ -18,11 +20,12 @@ public class Feedback {
     private  String title;
 
     @ManyToOne
-    @JoinColumn(name = "adminID", nullable = false)
+    @JoinColumn(name = "adminID", nullable = false,referencedColumnName = "username")
     private Admin admin;
     private boolean isDeleted;
 
     @ManyToOne
+    @JoinColumn(name = "typeFeedBackId",referencedColumnName = "typeID")
     private TypeFeedback typeFeedback;
 
 
