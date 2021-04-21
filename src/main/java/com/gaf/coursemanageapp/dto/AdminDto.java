@@ -11,9 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
-public class AdminDTO {
-    private String userName;
-    private String name;
-    private String email;
-    private String password;
+public class AdminDto extends BaseUserDto{
 }

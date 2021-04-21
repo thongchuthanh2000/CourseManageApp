@@ -1,7 +1,5 @@
-package com.gaf.coursemanageapp.entity;
+package com.gaf.coursemanageapp.dto;
 
-
-import com.gaf.coursemanageapp.validator.CheckID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Admin extends BaseUserEntity{
+public class TypeFeedbackDto {
+    private Integer typeID;
+    private String typeName;
+    private  boolean isDeleted;
 }

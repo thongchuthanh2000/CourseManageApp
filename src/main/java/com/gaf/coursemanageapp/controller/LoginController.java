@@ -27,6 +27,11 @@ public class LoginController {
     @Autowired
     private UserDetailsServiceImpl userAdminDetailsService;
 
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
+    public String getTest(){
+        return "TangYuCheng";
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest
                                                        )

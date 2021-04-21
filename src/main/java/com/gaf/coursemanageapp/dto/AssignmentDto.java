@@ -1,6 +1,9 @@
-package com.gaf.coursemanageapp.entity;
+package com.gaf.coursemanageapp.dto;
 
-
+import com.gaf.coursemanageapp.entity.Class;
+import com.gaf.coursemanageapp.entity.Module;
+import com.gaf.coursemanageapp.entity.Trainee;
+import com.gaf.coursemanageapp.entity.TraineeWithID;
 import com.gaf.coursemanageapp.user.TraineeUser;
 import lombok.*;
 import org.apache.tomcat.jni.Address;
@@ -12,29 +15,17 @@ import java.util.Collection;
 
 
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+public class AssignmentDto {
+    TraineeWithIdDto primaryKey = new TraineeWithIdDto();
 
-@Table
-@AssociationOverrides({
-
-        @AssociationOverride(name = "primaryKey.class",
-                joinColumns = @JoinColumn(name = "classID")),
-        @AssociationOverride(name = "primaryKey.trainer",
-                joinColumns = @JoinColumn(name = "trainerID",referencedColumnName = "username")),
-        @AssociationOverride(name = "primaryKey.module",
-                joinColumns = @JoinColumn(name = "moduleID")),
-})
-public class Assignment{
-    @EmbeddedId
-    TraineeWithID primaryKey = new TraineeWithID();
-
-    private TraineeWithID getPrimaryKey(){
+    private TraineeWithIdDto getPrimaryKey(){
         return primaryKey;
     }
-    @Transient
+
+
     public Class getmClass() {
         return getPrimaryKey().getMClass();
     }
@@ -42,7 +33,6 @@ public class Assignment{
         getPrimaryKey().setMClass(mClass);
     }
 
-    @Transient
     public Module getModule() {
         return getPrimaryKey().getModule();
     }
@@ -50,16 +40,14 @@ public class Assignment{
         getPrimaryKey().setModule(module);
     }
 
-    @Transient
-        public Trainee getTrainee() {
+
+    public Trainee getTrainee() {
         return getPrimaryKey().getTrainee();
     }
     public void setTrainee(Trainee trainee) {
         getPrimaryKey().setTrainee(trainee);
     }
 
-
-    @Column(length = 50, nullable = false, unique = true)
     private String registrationCode;
 
 }
