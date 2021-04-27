@@ -15,6 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.function.Predicate;
+
 @RestController
 @RequestMapping(value = "/login")
 public class LoginController {
@@ -37,20 +39,17 @@ public class LoginController {
                                                        )
             throws Exception {
         String role =authenticationRequest.getRole();
-        switch (role) {
+        Predicate<String> checkRole = x->{
+            if (x.equals(SystemConstant.ADMIN_ROLE)||
+                x.equals(SystemConstant.TRAINEE_ROLE)||
+                x.equals(SystemConstant.TRAINER_ROLE)){
+                SystemConstant.USER = role;
+            }
+            return false;
+        };
 
-            case SystemConstant
-                    .ADMIN_ROLE:
-                SystemConstant.USER = SystemConstant.ADMIN_ROLE;
-                break;
-            case SystemConstant
-                    .TRAINEE_ROLE:
-                SystemConstant.USER = SystemConstant.TRAINEE_ROLE;
-                break;
-
-
-            default:
-                throw new Exception("Incorrect ROLE");
+        if (!checkRole.test(role)){
+            throw new Exception("Incorrect ROLE");
         }
 
         try {
